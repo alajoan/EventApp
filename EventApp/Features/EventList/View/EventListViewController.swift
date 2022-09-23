@@ -10,10 +10,11 @@ import UIKit
 final class EventListViewController: UIViewController {
     
     private lazy var mainView: EventListMainView = {
-           var mainView = EventListMainView(delegate: self)
-           mainView.translatesAutoresizingMaskIntoConstraints = false
-           return mainView
-       }()
+        var mainView = EventListMainView(delegate: self)
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        return mainView
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,27 +23,27 @@ final class EventListViewController: UIViewController {
     }
     
     private func layoutViews() {
-            view.addSubview(mainView)
-            NSLayoutConstraint.activate([
-                // MARK: - mainViewConstraints
-                mainView.topAnchor.constraint(
-                    equalTo: view.layoutMarginsGuide.topAnchor,
-                    constant: 0
-                ),
-                mainView.leadingAnchor.constraint(
-                    equalTo: view.layoutMarginsGuide.leadingAnchor,
-                    constant: 0
-                ),
-                mainView.trailingAnchor.constraint(
-                    equalTo: view.layoutMarginsGuide.trailingAnchor,
-                    constant: 0
-                ),
-                mainView.bottomAnchor.constraint(
-                    equalTo: view.layoutMarginsGuide.bottomAnchor,
-                    constant: 0
-                )
-            ])
-        }
+        view.addSubview(mainView)
+        NSLayoutConstraint.activate([
+            // MARK: - mainViewConstraints
+            mainView.topAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.topAnchor,
+                constant: 0
+            ),
+            mainView.leadingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leadingAnchor,
+                constant: 0
+            ),
+            mainView.trailingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.trailingAnchor,
+                constant: 0
+            ),
+            mainView.bottomAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.bottomAnchor,
+                constant: 0
+            )
+        ])
+    }
 }
 
 extension EventListViewController: UITableViewDataSource {
@@ -51,12 +52,20 @@ extension EventListViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventListTableViewCell.identifier, for: indexPath) as? EventListTableViewCell
-        cell?.setData(eventTitle: "Doacao de cachorros", eventPrice: "Gratis", eventImage: UIImage(named: "BackgroundTest") ?? UIImage(), eventDate: "12/12/2012")
+        cell?.setData(eventTitle: "Feira de adoção de animais na Redenção", eventPrice: "R$29,99", eventImage: UIImage(named: "BackgroundTest") ?? UIImage(), eventDate: "12/12/2012")
         return UITableViewCell()
     }
     
@@ -74,7 +83,7 @@ extension EventListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let nextViewController = DetailsViewController(data: self.presenter.getDetailData(at: indexPath.row), title: "\(mainView.getTextfieldValue()) News")
-//        self.navigationController?.pushViewController(nextViewController, animated: true)
+        //        let nextViewController = DetailsViewController(data: self.presenter.getDetailData(at: indexPath.row), title: "\(mainView.getTextfieldValue()) News")
+        //        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
