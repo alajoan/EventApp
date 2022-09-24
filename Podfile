@@ -8,6 +8,7 @@ target 'EventApp' do
   # Pods for EventApp
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
+  pod 'RxAlamofire'
   target 'EventAppTests' do
     inherit! :search_paths
     # Pods for testing

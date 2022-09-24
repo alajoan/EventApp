@@ -25,6 +25,12 @@
 		DF8E5D2C28DBA7FF00A8AB90 /* EventAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E5D2B28DBA7FF00A8AB90 /* EventAppUITestsLaunchTests.swift */; };
 		DFC64F0828DC75E200F743C8 /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC64F0728DC75E200F743C8 /* EventListTableViewCell.swift */; };
 		DFC64F0928DC75E200F743C8 /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC64F0728DC75E200F743C8 /* EventListTableViewCell.swift */; };
+		DFF0167828DFC09700726D70 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167728DFC09700726D70 /* Constants.swift */; };
+		DFF0167928DFC09700726D70 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167728DFC09700726D70 /* Constants.swift */; };
+		DFF0167B28DFC1B000726D70 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167A28DFC1B000726D70 /* ApiRouter.swift */; };
+		DFF0167C28DFC1B000726D70 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167A28DFC1B000726D70 /* ApiRouter.swift */; };
+		DFF0167E28DFC74A00726D70 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167D28DFC74A00726D70 /* ApiClient.swift */; };
+		DFF0167F28DFC74A00726D70 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167D28DFC74A00726D70 /* ApiClient.swift */; };
 		EA67B029A13C3E17038C41AF /* Pods_EventAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637BF7E138A93D61EEAE4286 /* Pods_EventAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +75,9 @@
 		DF8E5D2928DBA7FF00A8AB90 /* EventAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAppUITests.swift; sourceTree = "<group>"; };
 		DF8E5D2B28DBA7FF00A8AB90 /* EventAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DFC64F0728DC75E200F743C8 /* EventListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
+		DFF0167728DFC09700726D70 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DFF0167A28DFC1B000726D70 /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
+		DFF0167D28DFC74A00726D70 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		E9011EDA514BEE378BC7A992 /* Pods-EventApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventApp.release.xcconfig"; path = "Target Support Files/Pods-EventApp/Pods-EventApp.release.xcconfig"; sourceTree = "<group>"; };
 		F940F58DFD3D72360F2EF910 /* Pods-EventApp-EventAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventApp-EventAppUITests.release.xcconfig"; path = "Target Support Files/Pods-EventApp-EventAppUITests/Pods-EventApp-EventAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +154,9 @@
 		DF5BDF2B28DBD19A004ADE2F /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				DFF0167728DFC09700726D70 /* Constants.swift */,
+				DFF0167A28DFC1B000726D70 /* ApiRouter.swift */,
+				DFF0167D28DFC74A00726D70 /* ApiClient.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -538,6 +550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFF0167E28DFC74A00726D70 /* ApiClient.swift in Sources */,
 				DF5BDF4028DBD386004ADE2F /* EventList.swift in Sources */,
 				DF8E5D0D28DBA7FE00A8AB90 /* ViewController.swift in Sources */,
 				DFC64F0828DC75E200F743C8 /* EventListTableViewCell.swift in Sources */,
@@ -545,6 +558,8 @@
 				DF5BDF3928DBD2C3004ADE2F /* EventListViewController.swift in Sources */,
 				DF8E5D0928DBA7FE00A8AB90 /* AppDelegate.swift in Sources */,
 				DF8E5D0B28DBA7FE00A8AB90 /* SceneDelegate.swift in Sources */,
+				DFF0167B28DFC1B000726D70 /* ApiRouter.swift in Sources */,
+				DFF0167828DFC09700726D70 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,7 +569,10 @@
 			files = (
 				DF5BDF4128DBD386004ADE2F /* EventList.swift in Sources */,
 				DF8E5D2028DBA7FF00A8AB90 /* EventAppTests.swift in Sources */,
+				DFF0167F28DFC74A00726D70 /* ApiClient.swift in Sources */,
 				DF5BDF3A28DBD2C3004ADE2F /* EventListViewController.swift in Sources */,
+				DFF0167928DFC09700726D70 /* Constants.swift in Sources */,
+				DFF0167C28DFC1B000726D70 /* ApiRouter.swift in Sources */,
 				DF5BDF3E28DBD2F7004ADE2F /* EventListMainView.swift in Sources */,
 				DFC64F0928DC75E200F743C8 /* EventListTableViewCell.swift in Sources */,
 			);
