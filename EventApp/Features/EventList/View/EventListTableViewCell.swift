@@ -88,14 +88,14 @@ extension EventListTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        layoutViews()
         makeRound()
         makeGradientBottomShadow()
-        layoutViews()
     }
     
     private func makeRound() {
-        contentView.layer.cornerRadius = 30
-        contentView.layer.masksToBounds = true
+        holder.layer.cornerRadius = 30
+        holder.layer.masksToBounds = true
     }
         
     private func makeGradientBottomShadow() {
@@ -112,8 +112,8 @@ extension EventListTableViewCell {
         NSLayoutConstraint.activate([
             holder.centerXAnchor.constraint(equalTo: centerXAnchor),
             holder.centerYAnchor.constraint(equalTo: centerYAnchor),
-            holder.widthAnchor.constraint(equalToConstant: 288),
-            holder.heightAnchor.constraint(equalToConstant: 300)
+            holder.widthAnchor.constraint(lessThanOrEqualToConstant: 288),
+            holder.heightAnchor.constraint(lessThanOrEqualToConstant: 300)
         ])
     }
     
@@ -130,11 +130,11 @@ extension EventListTableViewCell {
         NSLayoutConstraint.activate([
             eventTitleLabel.leadingAnchor.constraint(
                 equalTo: eventImageView.leadingAnchor,
-                constant: 5
+                constant: 20
             ),
             eventTitleLabel.trailingAnchor.constraint(
                 equalTo: eventImageView.trailingAnchor,
-                constant: -5
+                constant: -20
             ),
         ])
     }
@@ -147,15 +147,15 @@ extension EventListTableViewCell {
             ),
             eventDateLabel.leadingAnchor.constraint(
                 equalTo: eventImageView.leadingAnchor,
-                constant: 5
+                constant: 20
             ),
             eventDateLabel.trailingAnchor.constraint(
                 equalTo: eventImageView.trailingAnchor,
-                constant: -5
+                constant: -20
             ),
             eventDateLabel.bottomAnchor.constraint(
                 equalTo: eventImageView.bottomAnchor,
-                constant: -10
+                constant: -20
             )
         ])
     }
@@ -163,17 +163,17 @@ extension EventListTableViewCell {
     private func eventPriceLabelConstraints() {
         NSLayoutConstraint.activate([
             eventPriceLabel.centerYAnchor.constraint(equalTo: eventDateLabel.centerYAnchor),
-            eventPriceLabel.trailingAnchor.constraint(equalTo:  holder.trailingAnchor, constant: -15)
+            eventPriceLabel.trailingAnchor.constraint(equalTo:  holder.trailingAnchor, constant: -20)
         ])
         
     }
     
     private func bottomShadowConstraints() {
         NSLayoutConstraint.activate([
-            bottomShadow.topAnchor.constraint(equalTo: holder.topAnchor),
-            bottomShadow.bottomAnchor.constraint(equalTo: holder.bottomAnchor),
-            bottomShadow.leadingAnchor.constraint(equalTo: holder.leadingAnchor),
-            bottomShadow.trailingAnchor.constraint(equalTo: holder.trailingAnchor)
+            bottomShadow.centerXAnchor.constraint(equalTo: eventImageView.centerXAnchor),
+            bottomShadow.centerYAnchor.constraint(equalTo: eventImageView.centerYAnchor),
+            bottomShadow.widthAnchor.constraint(equalTo: eventImageView.widthAnchor),
+            bottomShadow.heightAnchor.constraint(equalTo: eventImageView.heightAnchor)
         ])
     }
     

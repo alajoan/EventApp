@@ -9,6 +9,7 @@ import UIKit
 
 final class EventListViewController: UIViewController {
     
+    
     private lazy var mainView: EventListMainView = {
         var mainView = EventListMainView(delegate: self)
         mainView.translatesAutoresizingMaskIntoConstraints = false
@@ -19,17 +20,36 @@ final class EventListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layoutViews()
+        customizeNavBar()
         view.backgroundColor = .white
     }
     
     private func layoutViews() {
         view.addSubview(mainView)
+        mainViewConstraints()
+    }
+    
+    private func customizeNavBar() {
+        let navBar = self.navigationController?.navigationBar
+
+        let standardAppearance = UINavigationBarAppearance()
+        standardAppearance.configureWithOpaqueBackground()
+        
+        navBar?.standardAppearance = standardAppearance
+        navBar?.scrollEdgeAppearance = standardAppearance
+        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navBar?.backItem?.backBarButtonItem = backBarButton
+        navBar?.prefersLargeTitles = true
+        navBar?.isTranslucent = true
+        navBar?.topItem?.backButtonDisplayMode = .minimal
+        self.title = "Eventos"
+    }
+    
+    private func mainViewConstraints() {
         NSLayoutConstraint.activate([
             // MARK: - mainViewConstraints
             mainView.topAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.topAnchor,
-                constant: 0
-            ),
+                equalTo: view.layoutMarginsGuide.topAnchor            ),
             mainView.leadingAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leadingAnchor,
                 constant: 0
