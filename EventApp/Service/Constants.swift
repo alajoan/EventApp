@@ -8,7 +8,7 @@
 import Foundation
 
 struct Constants {
-    static let baseUrl = ""
+    static let baseUrl = "http://5f5a8f24d44d640016169133.mockapi.io/api/"
     
     struct Parameters {
         static let identifier = "identifier"

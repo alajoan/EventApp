@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class EventListTableViewCell: UITableViewCell {
     static let identifier = "eventListCell"
     private var gradient: CAGradientLayer?
+    private var disposeBag = DisposeBag()
+    
+    private var viewModel = EventListViewModel()
     
     private lazy var holder: UIView = {
         var holder = UIView()
@@ -17,7 +22,7 @@ final class EventListTableViewCell: UITableViewCell {
         return holder
     }()
     
-    private lazy var eventImageView: UIImageView = {
+    lazy var eventImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "BackgroundTest")
@@ -180,10 +185,16 @@ extension EventListTableViewCell {
 }
 
 extension EventListTableViewCell {
-    func setData(eventTitle: String, eventPrice: String, eventImage: UIImage, eventDate: String) {
+    func setData(eventTitle: String, eventPrice: String, eventImageUrl: String, eventDate: String) {
         eventTitleLabel.text = eventTitle
         eventPriceLabel.text = eventPrice
-        eventImageView.image = eventImage
         eventDateLabel.text = eventDate
+        viewModel.fetchImage(url: eventImageUrl)
+            .subscribe(
+                onNext: { image in
+                    self.eventImageView.image = image
+                }
+            )
+            .disposed(by: disposeBag)
     }
 }

@@ -12,13 +12,12 @@ enum ApiRouter: URLRequestConvertible {
     
     case checkIn(identifier: String, eventId: Int)
     case eventList
+    case download(url: String)
     
     private var method: HTTPMethod {
         switch self {
         case .checkIn:
             return .post
-        case .eventList:
-            return .get
         default:
             return .get
         }
@@ -30,8 +29,8 @@ enum ApiRouter: URLRequestConvertible {
             return "checkin"
         case .eventList:
             return "events"
-        default:
-            return "events"
+        case.download:
+            return ""
         }
     }
     
@@ -42,17 +41,22 @@ enum ApiRouter: URLRequestConvertible {
                 Constants.Parameters.identifier : identifier,
                 Constants.Parameters.eventId : eventId
             ]
-        case .eventList:
-            return [:]
         default:
             return [:]
         }
     }
     
+    
     func asURLRequest() throws -> URLRequest {
-        let url = try Constants.baseUrl.asURL()
-              
-        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        
+        var urlRequest: URLRequest
+        
+        switch self {
+        case .download(let url):
+            urlRequest = URLRequest(url: try url.asURL())
+        default:
+            urlRequest = URLRequest(url: try Constants.baseUrl.asURL().appendingPathComponent(path))
+        }
         
         urlRequest.httpMethod = method.rawValue
         

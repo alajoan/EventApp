@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import RxSwift
 
 class EventListMainView: UIView {
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(
             EventListTableViewCell.self,
@@ -23,13 +24,6 @@ class EventListMainView: UIView {
     init() {
         super.init(frame: .zero)
         layoutViews()
-    }
-    
-    convenience init(delegate: EventListViewController)
-    {
-        self.init()
-        tableView.delegate = delegate
-        tableView.dataSource = delegate
     }
     
     @available(*, unavailable)

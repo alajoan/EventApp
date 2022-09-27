@@ -6,24 +6,41 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class EventListViewController: UIViewController {
     
+    private var viewModel: EventListViewModel?
+    private let disposeBag = DisposeBag()
     
     private lazy var mainView: EventListMainView = {
-        var mainView = EventListMainView(delegate: self)
+        var mainView = EventListMainView()
         mainView.translatesAutoresizingMaskIntoConstraints = false
         return mainView
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView.tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        bindEventList()
         layoutViews()
         customizeNavBar()
         view.backgroundColor = .white
     }
     
+    init(viewModel: EventListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+//MARK: - Layout
+extension EventListViewController {
     private func layoutViews() {
         view.addSubview(mainView)
         mainViewConstraints()
@@ -66,36 +83,23 @@ final class EventListViewController: UIViewController {
     }
 }
 
-extension EventListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: EventListTableViewCell.identifier, for: indexPath) as? EventListTableViewCell
-        cell?.setData(eventTitle: "Feira de adoção de animais na Redenção", eventPrice: "R$29,99", eventImage: UIImage(named: "BackgroundTest") ?? UIImage(), eventDate: "12/12/2012")
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.contentView.layer.masksToBounds = true
-        let radius = cell.contentView.layer.cornerRadius
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
-        cell.selectionStyle = .none
-    }
-}
-
+//MARK: - private funcs
 extension EventListViewController: UITableViewDelegate {
+    private func bindEventList() {
+        viewModel?.fetchEventList().bind(
+            to: mainView.tableView.rx.items(cellIdentifier: EventListTableViewCell.identifier, cellType: EventListTableViewCell.self)) {
+            index, viewModel, cell in
+                cell.setData(
+                    eventTitle: viewModel.eventTitle,
+                    eventPrice: viewModel.eventPrice,
+                    eventImageUrl: viewModel.eventImageUrl,
+                    eventDate: viewModel.eventDate
+                )
+            }.disposed(by: disposeBag)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 320
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let nextViewController = DetailsViewController(data: self.presenter.getDetailData(at: indexPath.row), title: "\(mainView.getTextfieldValue()) News")
-        //        self.navigationController?.pushViewController(nextViewController, animated: true)
-    }
+
 }

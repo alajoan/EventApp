@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EventList: Codable {
+struct Event: Codable {
     var date: Double
     var description: String
     var image: String
