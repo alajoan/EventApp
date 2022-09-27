@@ -25,28 +25,31 @@ final class EventListTableViewCell: UITableViewCell {
     lazy var eventImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "BackgroundTest")
+        image.image = UIImage(named: "ImageNotAvailable")
         image.contentMode = .scaleAspectFill
         return image
     }()
     
-    private lazy var eventTitleLabel: UILabel = {
-        var title = UILabel()
+    private lazy var eventTitleLabel: DSLabel = {
+        var title = DSLabel(
+            labelType: .title,
+            alignment: .center
+        )
         title.translatesAutoresizingMaskIntoConstraints = false
         title.textColor = .white
         title.numberOfLines = 0
         return title
     }()
     
-    private lazy var eventDateLabel: UILabel = {
-        var date = UILabel()
+    private lazy var eventDateLabel: DSLabel = {
+        var date = DSLabel(labelType: .details)
         date.translatesAutoresizingMaskIntoConstraints = false
         date.textColor = .white
         return date
     }()
     
-    private lazy var eventPriceLabel: UILabel = {
-        var price = UILabel()
+    private lazy var eventPriceLabel: DSLabel = {
+        var price = DSLabel(labelType: .details, alignment: .center)
         price.translatesAutoresizingMaskIntoConstraints = false
         price.textColor = .white
         return price
@@ -71,6 +74,7 @@ final class EventListTableViewCell: UITableViewCell {
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 //MARK: - LayoutView
@@ -152,7 +156,7 @@ extension EventListTableViewCell {
             ),
             eventDateLabel.leadingAnchor.constraint(
                 equalTo: eventImageView.leadingAnchor,
-                constant: 20
+                constant: 40
             ),
             eventDateLabel.trailingAnchor.constraint(
                 equalTo: eventImageView.trailingAnchor,
@@ -168,7 +172,7 @@ extension EventListTableViewCell {
     private func eventPriceLabelConstraints() {
         NSLayoutConstraint.activate([
             eventPriceLabel.centerYAnchor.constraint(equalTo: eventDateLabel.centerYAnchor),
-            eventPriceLabel.trailingAnchor.constraint(equalTo:  holder.trailingAnchor, constant: -20)
+            eventPriceLabel.trailingAnchor.constraint(equalTo:  holder.trailingAnchor, constant: -40)
         ])
         
     }
@@ -190,6 +194,7 @@ extension EventListTableViewCell {
         eventPriceLabel.text = eventPrice
         eventDateLabel.text = eventDate
         viewModel.fetchImage(url: eventImageUrl)
+            .subscribe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { image in
                     self.eventImageView.image = image
