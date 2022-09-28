@@ -42,7 +42,12 @@ extension DSLabel {
     }
     
     private func setTextColor() {
-        self.textColor = .white
+        switch self.labelType {
+        case .descriptionText:
+            self.textColor = .black
+        default:
+            self.textColor = .white
+        }
     }
     
     private func setFontSize() {

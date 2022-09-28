@@ -24,6 +24,7 @@ final class EventListViewController: UIViewController {
         super.viewDidLoad()
         mainView.tableView.rx.setDelegate(self).disposed(by: disposeBag)
         bindEventList()
+        didSelectEvent()
         layoutViews()
         customizeNavBar()
         view.backgroundColor = .white
@@ -101,5 +102,11 @@ extension EventListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 320
     }
-
+    
+    func didSelectEvent() {
+        mainView.tableView.rx.modelSelected(EventViewModel.self)
+            .subscribe(onNext: { model in
+                print("titulo: \(model.eventTitle)")
+            }).disposed(by: disposeBag)
+    }
 }
