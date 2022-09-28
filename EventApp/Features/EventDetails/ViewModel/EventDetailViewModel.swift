@@ -27,8 +27,16 @@ final class EventDetailViewModel {
         return event.description
     }
     
+    var eventId: String {
+        return event.id
+    }
+    
     init(event: Event) {
         self.event = event
+    }
+    
+    func getEvent() -> Event {
+        return self.event
     }
     
     func formatToCurrency(_ value: Float) -> String {

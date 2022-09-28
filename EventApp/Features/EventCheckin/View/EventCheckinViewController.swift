@@ -1,23 +1,16 @@
 //
-//  EventDetailsViewController.swift
+//  EventCheckin.swift
 //  EventApp
 //
-//  Created by user228425 on 9/27/22.
+//  Created by user228425 on 9/28/22.
 //
 
 import Foundation
 import UIKit
 
-final class EventDetailsViewController: UIViewController {
-    
-    private var viewModel: EventDetailViewModel?
-    
-    private lazy var mainView: EventDetailsMainView = {
-        guard let viewModel = viewModel else {
-            return EventDetailsMainView(eventId: "")
-        }
-        var view = EventDetailsMainView(eventId: viewModel.eventId)
-        view.delegate = self
+final class EventCheckinViewController: UIViewController {
+    private lazy var mainView: EventCheckinMainView = {
+        var view = EventCheckinMainView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -26,31 +19,20 @@ final class EventDetailsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        guard let viewModel = viewModel else { return }
-
-        mainView.setData(
-            eventDescription: viewModel.eventDescription,
-            eventMapCoordinates: viewModel.mapCoordinates(),
-            eventMapRegion: viewModel.mapRegion(),
-            eventPrice: viewModel.eventPrice,
-            eventDate: viewModel.eventDate
-        )
         customizeNavBar()
         layoutSubviews()
     }
     
-    init(viewModel: EventDetailViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
 }
-
-
-extension EventDetailsViewController {
+extension EventCheckinViewController {
     private func layoutSubviews() {
         view.addSubview(mainView)
         mainViewConstraints()
@@ -67,7 +49,7 @@ extension EventDetailsViewController {
     
     private func customizeNavBar() {
         let navBar = self.navigationController?.navigationBar
-
+        
         let standardAppearance = UINavigationBarAppearance()
         standardAppearance.configureWithOpaqueBackground()
         
@@ -78,12 +60,6 @@ extension EventDetailsViewController {
         navBar?.prefersLargeTitles = true
         navBar?.isTranslucent = true
         navBar?.topItem?.backButtonDisplayMode = .minimal
-        self.title = viewModel?.eventTitle
-    }
-}
-
-extension EventDetailsViewController: EventDetailsMainViewProtocol {
-    func goToCheckin(eventId: String) {
-        print(eventId)
+        //self.title = viewModel?.eventTitle
     }
 }

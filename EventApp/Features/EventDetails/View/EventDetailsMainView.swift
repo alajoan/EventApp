@@ -9,7 +9,15 @@ import Foundation
 import UIKit
 import MapKit
 
+protocol EventDetailsMainViewProtocol: AnyObject {
+    func goToCheckin(eventId: String)
+}
+
 final class EventDetailsMainView: UIView {
+    
+    weak var delegate: EventDetailsMainViewProtocol?
+    var eventId: String?
+    
     var contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 200)
     
    private lazy var scrollView: UIScrollView = {
@@ -71,10 +79,12 @@ final class EventDetailsMainView: UIView {
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(checkIn), for: .touchUpInside)
         return button
     }()
     
-    init() {
+    init(eventId: String) {
+        self.eventId = eventId
         super.init(frame: .zero)
         layoutViews()
     }
@@ -180,5 +190,10 @@ extension EventDetailsMainView {
         self.eventMap.setRegion(eventMapRegion, animated: true)
         self.eventPrice.text = eventPrice
         self.eventDate.text = eventDate
+    }
+    
+    @objc func checkIn() {
+        guard let eventId = eventId else { return }
+        delegate?.goToCheckin(eventId: eventId)
     }
 }
