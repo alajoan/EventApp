@@ -18,14 +18,14 @@ struct Event: Codable {
     var id: String
     
     init(
-        date: Double,
-        description: String,
-        image: String,
-        longitude: Float,
-        latitude: Float,
-        price: Float,
-        title: String,
-        id: String
+        date: Double = 0,
+        description: String = "",
+        image: String = "",
+        longitude: Float = 0,
+        latitude: Float = 0,
+        price: Float = 0,
+        title: String = "",
+        id: String = ""
     ) {
         self.date = date
         self.description = description

@@ -43,6 +43,8 @@
 		DFF0167C28DFC1B000726D70 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167A28DFC1B000726D70 /* ApiRouter.swift */; };
 		DFF0167E28DFC74A00726D70 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167D28DFC74A00726D70 /* ApiClient.swift */; };
 		DFF0167F28DFC74A00726D70 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167D28DFC74A00726D70 /* ApiClient.swift */; };
+		DFFE3D1228E47BB300CD9C31 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFE3D1128E47BB300CD9C31 /* EventDetailViewModel.swift */; };
+		DFFE3D1328E47BB300CD9C31 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFE3D1128E47BB300CD9C31 /* EventDetailViewModel.swift */; };
 		EA67B029A13C3E17038C41AF /* Pods_EventAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637BF7E138A93D61EEAE4286 /* Pods_EventAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,7 @@
 		DFF0167728DFC09700726D70 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DFF0167A28DFC1B000726D70 /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		DFF0167D28DFC74A00726D70 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		DFFE3D1128E47BB300CD9C31 /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
 		E9011EDA514BEE378BC7A992 /* Pods-EventApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventApp.release.xcconfig"; path = "Target Support Files/Pods-EventApp/Pods-EventApp.release.xcconfig"; sourceTree = "<group>"; };
 		F940F58DFD3D72360F2EF910 /* Pods-EventApp-EventAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventApp-EventAppUITests.release.xcconfig"; path = "Target Support Files/Pods-EventApp-EventAppUITests/Pods-EventApp-EventAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -271,6 +274,7 @@
 		DF5BDF3428DBD285004ADE2F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DFFE3D1128E47BB300CD9C31 /* EventDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -598,6 +602,7 @@
 				DF8E5D0D28DBA7FE00A8AB90 /* ViewController.swift in Sources */,
 				DFC64F0828DC75E200F743C8 /* EventListTableViewCell.swift in Sources */,
 				DF5BDF3D28DBD2F7004ADE2F /* EventListMainView.swift in Sources */,
+				DFFE3D1228E47BB300CD9C31 /* EventDetailViewModel.swift in Sources */,
 				DF5BDF3928DBD2C3004ADE2F /* EventListViewController.swift in Sources */,
 				DF05E2A728E356FE00B1F19A /* EventDetailsMainView.swift in Sources */,
 				DF8E5D0928DBA7FE00A8AB90 /* AppDelegate.swift in Sources */,
@@ -627,6 +632,7 @@
 				DFCB3A6D28E0D1950098CBC2 /* EventListViewModel.swift in Sources */,
 				DF5BDF3E28DBD2F7004ADE2F /* EventListMainView.swift in Sources */,
 				DFC64F0928DC75E200F743C8 /* EventListTableViewCell.swift in Sources */,
+				DFFE3D1328E47BB300CD9C31 /* EventDetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

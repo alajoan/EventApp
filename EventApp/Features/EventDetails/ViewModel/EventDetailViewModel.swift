@@ -1,20 +1,18 @@
 //
-//  EventViewModel.swift
+//  EventDetailViewModel.swift
 //  EventApp
 //
-//  Created by user228425 on 9/26/22.
+//  Created by user228425 on 9/28/22.
 //
 
 import Foundation
-import UIKit
-import RxCocoa
-import RxSwift
+import MapKit
 
-struct EventViewModel {
+final class EventDetailViewModel {
     private let event: Event
     
     var eventPrice: String {
-        return self.formatToCurrency(event.price)
+        return "Preço do evento: \n\(self.formatToCurrency(event.price))"
     }
     
     var eventTitle: String {
@@ -22,19 +20,15 @@ struct EventViewModel {
     }
     
     var eventDate: String {
-        return self.formatDateFromMilliseconds(event.date)
+        return "Data do evento: \n\(self.formatDateFromMilliseconds(event.date))"
     }
     
-    var eventImageUrl: String {
-        return event.image
+    var eventDescription: String {
+        return event.description
     }
     
     init(event: Event) {
         self.event = event
-    }
-    
-    func getEvent() -> Event {
-        return event
     }
     
     func formatToCurrency(_ value: Float) -> String {
@@ -50,8 +44,27 @@ struct EventViewModel {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "pt-BR")
         dateFormatter.timeZone = .current
-        dateFormatter.dateFormat = "d MMM, yyyy"
+        dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
         let finalDate = dateFormatter.string(from: convertedDate)
         return finalDate
+    }
+    
+    func mapCoordinates() -> MKPointAnnotation {
+        let annotation = MKPointAnnotation()
+        
+        annotation.coordinate = CLLocationCoordinate2D(
+            latitude: CLLocationDegrees(event.latitude),
+            longitude: CLLocationDegrees(event.longitude)
+        )
+        
+        return annotation
+    }
+    
+    func mapRegion() -> MKCoordinateRegion {
+        return MKCoordinateRegion(
+            center: mapCoordinates().coordinate,
+            latitudinalMeters: 600,
+            longitudinalMeters: 500
+        )
     }
 }

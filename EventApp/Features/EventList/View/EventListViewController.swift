@@ -105,8 +105,9 @@ extension EventListViewController: UITableViewDelegate {
     
     func didSelectEvent() {
         mainView.tableView.rx.modelSelected(EventViewModel.self)
-            .subscribe(onNext: { model in
-                print("titulo: \(model.eventTitle)")
+            .subscribe(onNext: { [weak self] model in
+                let VC = EventDetailsViewController(viewModel: EventDetailViewModel(event: model.getEvent()))
+                self?.navigationController?.pushViewController(VC, animated: true)
             }).disposed(by: disposeBag)
     }
 }
