@@ -9,8 +9,11 @@ import Foundation
 import UIKit
 
 final class EventCheckinViewController: UIViewController {
+    
+    private var viewModel: EventCheckinViewModel
+    
     private lazy var mainView: EventCheckinMainView = {
-        var view = EventCheckinMainView()
+        var view = EventCheckinMainView(viewModel: self.viewModel)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -23,11 +26,13 @@ final class EventCheckinViewController: UIViewController {
         layoutSubviews()
     }
     
-    init() {
+    init(viewModel: EventCheckinViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
+        self.viewModel = EventCheckinViewModel()
         super.init(coder: aDecoder)
     }
     
@@ -60,6 +65,7 @@ extension EventCheckinViewController {
         navBar?.prefersLargeTitles = true
         navBar?.isTranslucent = true
         navBar?.topItem?.backButtonDisplayMode = .minimal
-        //self.title = viewModel?.eventTitle
+        self.title = viewModel.eventTitle
     }
 }
+

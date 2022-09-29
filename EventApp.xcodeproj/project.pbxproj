@@ -41,6 +41,12 @@
 		DFC64F0928DC75E200F743C8 /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC64F0728DC75E200F743C8 /* EventListTableViewCell.swift */; };
 		DFCB3A6C28E0D1950098CBC2 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCB3A6B28E0D1940098CBC2 /* EventListViewModel.swift */; };
 		DFCB3A6D28E0D1950098CBC2 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCB3A6B28E0D1940098CBC2 /* EventListViewModel.swift */; };
+		DFEAF55C28E60439000C7709 /* EventCheckinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEAF55B28E60439000C7709 /* EventCheckinViewModel.swift */; };
+		DFEAF55D28E60439000C7709 /* EventCheckinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEAF55B28E60439000C7709 /* EventCheckinViewModel.swift */; };
+		DFEAF55F28E605E2000C7709 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEAF55E28E605E2000C7709 /* Utils.swift */; };
+		DFEAF56028E605E2000C7709 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEAF55E28E605E2000C7709 /* Utils.swift */; };
+		DFEAF56528E65036000C7709 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEAF56428E65036000C7709 /* UIButtonExtension.swift */; };
+		DFEAF56628E65036000C7709 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEAF56428E65036000C7709 /* UIButtonExtension.swift */; };
 		DFF0167828DFC09700726D70 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167728DFC09700726D70 /* Constants.swift */; };
 		DFF0167928DFC09700726D70 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167728DFC09700726D70 /* Constants.swift */; };
 		DFF0167B28DFC1B000726D70 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF0167A28DFC1B000726D70 /* ApiRouter.swift */; };
@@ -101,6 +107,9 @@
 		DF8E5D2B28DBA7FF00A8AB90 /* EventAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DFC64F0728DC75E200F743C8 /* EventListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
 		DFCB3A6B28E0D1940098CBC2 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
+		DFEAF55B28E60439000C7709 /* EventCheckinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCheckinViewModel.swift; sourceTree = "<group>"; };
+		DFEAF55E28E605E2000C7709 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		DFEAF56428E65036000C7709 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		DFF0167728DFC09700726D70 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DFF0167A28DFC1B000726D70 /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		DFF0167D28DFC74A00726D70 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
@@ -164,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				DF1B8E0728E3307100E513BE /* DateExtension.swift */,
+				DFEAF55E28E605E2000C7709 /* Utils.swift */,
+				DFEAF56428E65036000C7709 /* UIButtonExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -304,6 +315,7 @@
 		DF5BDF3728DBD294004ADE2F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DFEAF55B28E60439000C7709 /* EventCheckinViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -603,6 +615,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFF0167E28DFC74A00726D70 /* ApiClient.swift in Sources */,
+				DFEAF56528E65036000C7709 /* UIButtonExtension.swift in Sources */,
 				DF1B8E0828E3307100E513BE /* DateExtension.swift in Sources */,
 				DF87BD8628E4F8900065362E /* EventCheckinViewController.swift in Sources */,
 				DF71900628E203F300ED42B5 /* EventViewModel.swift in Sources */,
@@ -619,6 +632,8 @@
 				DF8E5D0B28DBA7FE00A8AB90 /* SceneDelegate.swift in Sources */,
 				DF1B8E0528E3289E00E513BE /* DSLabel.swift in Sources */,
 				DFF0167B28DFC1B000726D70 /* ApiRouter.swift in Sources */,
+				DFEAF55F28E605E2000C7709 /* Utils.swift in Sources */,
+				DFEAF55C28E60439000C7709 /* EventCheckinViewModel.swift in Sources */,
 				DFF0167828DFC09700726D70 /* Constants.swift in Sources */,
 				DFCB3A6C28E0D1950098CBC2 /* EventListViewModel.swift in Sources */,
 			);
@@ -629,6 +644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF5BDF4128DBD386004ADE2F /* Event.swift in Sources */,
+				DFEAF56628E65036000C7709 /* UIButtonExtension.swift in Sources */,
 				DF87BD8A28E4F8A40065362E /* EventCheckinMainView.swift in Sources */,
 				DF1B8E0928E3307100E513BE /* DateExtension.swift in Sources */,
 				DF8E5D2028DBA7FF00A8AB90 /* EventAppTests.swift in Sources */,
@@ -645,6 +661,8 @@
 				DF5BDF3E28DBD2F7004ADE2F /* EventListMainView.swift in Sources */,
 				DFC64F0928DC75E200F743C8 /* EventListTableViewCell.swift in Sources */,
 				DFFE3D1328E47BB300CD9C31 /* EventDetailViewModel.swift in Sources */,
+				DFEAF56028E605E2000C7709 /* Utils.swift in Sources */,
+				DFEAF55D28E60439000C7709 /* EventCheckinViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,13 +10,10 @@ import UIKit
 
 final class EventDetailsViewController: UIViewController {
     
-    private var viewModel: EventDetailViewModel?
+    private var viewModel: EventDetailViewModel
     
     private lazy var mainView: EventDetailsMainView = {
-        guard let viewModel = viewModel else {
-            return EventDetailsMainView(eventId: "")
-        }
-        var view = EventDetailsMainView(eventId: viewModel.eventId)
+        var view = EventDetailsMainView(viewModel: self.viewModel)
         view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -25,16 +22,6 @@ final class EventDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        guard let viewModel = viewModel else { return }
-
-        mainView.setData(
-            eventDescription: viewModel.eventDescription,
-            eventMapCoordinates: viewModel.mapCoordinates(),
-            eventMapRegion: viewModel.mapRegion(),
-            eventPrice: viewModel.eventPrice,
-            eventDate: viewModel.eventDate
-        )
         customizeNavBar()
         layoutSubviews()
     }
@@ -45,6 +32,7 @@ final class EventDetailsViewController: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        viewModel = EventDetailViewModel()
         super.init(coder: aDecoder)
     }
 }
@@ -78,12 +66,13 @@ extension EventDetailsViewController {
         navBar?.prefersLargeTitles = true
         navBar?.isTranslucent = true
         navBar?.topItem?.backButtonDisplayMode = .minimal
-        self.title = viewModel?.eventTitle
+        self.title = viewModel.eventTitle
     }
 }
 
 extension EventDetailsViewController: EventDetailsMainViewProtocol {
     func goToCheckin(eventId: String) {
-        print(eventId)
+        let VC = EventCheckinViewController(viewModel: EventCheckinViewModel(event: viewModel.getEvent()))
+        self.navigationController?.pushViewController(VC, animated: true)
     }
 }

@@ -12,7 +12,7 @@ final class EventDetailViewModel {
     private let event: Event
     
     var eventPrice: String {
-        return "Preço do evento: \n\(self.formatToCurrency(event.price))"
+        return "Preço do evento: \n\(Utils.formatToCurrency(event.price))"
     }
     
     var eventTitle: String {
@@ -20,7 +20,7 @@ final class EventDetailViewModel {
     }
     
     var eventDate: String {
-        return "Data do evento: \n\(self.formatDateFromMilliseconds(event.date))"
+        return "Data do evento: \n\(Utils.formatDateFromMilliseconds(event.date, dateFormat: .extensionDate))"
     }
     
     var eventDescription: String {
@@ -31,30 +31,12 @@ final class EventDetailViewModel {
         return event.id
     }
     
-    init(event: Event) {
+    init(event: Event = Event()) {
         self.event = event
     }
     
     func getEvent() -> Event {
         return self.event
-    }
-    
-    func formatToCurrency(_ value: Float) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "pt-BR")
-        guard let formattedValue = formatter.string(from: value as NSNumber) else { return "" }
-        return formattedValue
-    }
-    
-    func formatDateFromMilliseconds(_ date: Double) -> String {
-        let convertedDate = Date.init(milliseconds: Int64(date))
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "pt-BR")
-        dateFormatter.timeZone = .current
-        dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
-        let finalDate = dateFormatter.string(from: convertedDate)
-        return finalDate
     }
     
     func mapCoordinates() -> MKPointAnnotation {

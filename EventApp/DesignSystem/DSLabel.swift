@@ -12,6 +12,7 @@ public class DSLabel: UILabel {
         case title
         case descriptionText
         case details
+        case error
     }
     
     var labelType: LabelType!
@@ -45,6 +46,8 @@ extension DSLabel {
         switch self.labelType {
         case .descriptionText:
             self.textColor = .black
+        case .error:
+            self.textColor = .systemRed
         default:
             self.textColor = .white
         }
@@ -61,6 +64,8 @@ extension DSLabel {
         case .details:
             self.font = UIFont.systemFont(ofSize: 14, weight: .thin)
             break
+        case .error:
+            self.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
         default:
             self.font = UIFont.systemFont(ofSize: 14, weight: .regular)
             break
