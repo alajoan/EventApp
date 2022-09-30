@@ -13,6 +13,7 @@ struct Constants {
     struct Parameters {
         static let identifier = "identifier"
         static let eventId = "eventId"
+        static let email = "email"
     }
     
     enum HttpHeaderField: String {

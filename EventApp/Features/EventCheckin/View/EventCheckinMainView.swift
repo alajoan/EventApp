@@ -13,7 +13,7 @@ import RxCocoa
 protocol EventCheckinViewProtocol: AnyObject {
     func startSpinner()
     func stopSpinner()
-    func showAlert()
+    func showAlert(title: String, message: String)
     func isNameValid(_ name: String) -> Bool
     func isEmailValid(_ email: String) -> Bool
 }
@@ -238,10 +238,10 @@ extension EventCheckinMainView {
     
     @objc func checkIn() {
         delegate?.startSpinner()
-        
         checkinObservable.subscribe(
             onNext: {[weak self] _ in
                 self?.delegate?.stopSpinner()
+                self?.delegate?.showAlert(title: "foi", message: "Realmente foi")
                 print("Deu certo:")
             }
         )

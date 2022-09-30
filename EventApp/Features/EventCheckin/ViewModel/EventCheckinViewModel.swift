@@ -35,7 +35,7 @@ class EventCheckinViewModel {
         return name.count > 2
     }
     
-    func checkin() -> Observable<[String:String]>{
-        ApiClient.checkinUser(identifier: "alajoan", eventId: 1)
+    func checkin(identifier: String, eventId: String, email: String) -> Observable<[String:String]>{
+        ApiClient.checkinUser(identifier: "alajoan", eventId: 1, email: "alajoan@gmail.com")
     }
 }

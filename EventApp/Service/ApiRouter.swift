@@ -10,7 +10,7 @@ import Alamofire
 
 enum ApiRouter: URLRequestConvertible {
     
-    case checkIn(identifier: String, eventId: Int)
+    case checkIn(identifier: String, eventId: Int, email: String)
     case eventList
     case download(url: String)
     
@@ -36,10 +36,11 @@ enum ApiRouter: URLRequestConvertible {
     
     private var parameters: Parameters? {
         switch self {
-        case .checkIn(let identifier, let eventId):
+        case .checkIn(let identifier, let eventId, let email):
             return [
                 Constants.Parameters.identifier : identifier,
-                Constants.Parameters.eventId : eventId
+                Constants.Parameters.eventId : eventId,
+                Constants.Parameters.email : email
             ]
         default:
             return [:]

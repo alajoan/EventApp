@@ -16,7 +16,7 @@ final class EventCheckinViewController: UIViewController {
     private lazy var mainView: EventCheckinMainView = {
         var view = EventCheckinMainView(
             delegate: self,
-            checkinObservable: viewModel.checkin(),
+            checkinObservable: viewModel.checkin(identifier: "alajoan", eventId: "2", email: "alajoan.joantahn@gmail.com"),
             eventId: viewModel.eventID
         )
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -28,11 +28,12 @@ final class EventCheckinViewController: UIViewController {
         view.backgroundColor = .white
         customizeNavBar()
         layoutSubviews()
+        spinner = Spinner(superView: view)
     }
     
     init(viewModel: EventCheckinViewModel) {
         self.viewModel = viewModel
-        //spinner = Spinner(superView: view)
+        //
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -84,15 +85,34 @@ extension EventCheckinViewController: EventCheckinViewProtocol {
     }
     
     func startSpinner() {
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.spinner?.startLoading()
     }
     
     func stopSpinner() {
-        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.spinner?.stopLoading()
     }
     
-    func showAlert() {
-        return
+    func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: UIAlertController.Style.alert
+        )
+        
+        alert.addAction(
+            UIAlertAction(
+                title: "Ok",
+                style: UIAlertAction.Style.default,
+                handler: { (action) in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            )
+        )
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
