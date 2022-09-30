@@ -43,13 +43,14 @@ extension EventDetailsViewController {
     private func layoutSubviews() {
         view.addSubview(mainView)
         mainViewConstraints()
-        mainView.setData(
+        let config = EventDetailsMainView.Config(
             eventDescription: viewModel.eventDescription,
             eventMapCoordinates: viewModel.mapCoordinates(),
             eventMapRegion: viewModel.mapRegion(),
             eventPrice: viewModel.eventPrice,
             eventDate: viewModel.eventDate
         )
+        mainView.setData(with: config)
     }
     
     private func mainViewConstraints() {

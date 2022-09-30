@@ -194,11 +194,11 @@ extension EventListTableViewCell {
 
 //MARK: - Data related funcs
 extension EventListTableViewCell {
-    func setData(eventTitle: String, eventPrice: String, image: Observable<UIImage>, eventDate: String) {
-        eventTitleLabel.text = eventTitle
-        eventPriceLabel.text = eventPrice
-        eventDateLabel.text = eventDate
-        image.subscribe(
+    func setData(with config: Config) {
+        eventTitleLabel.text = config.eventTitle
+        eventPriceLabel.text = config.eventPrice
+        eventDateLabel.text = config.eventDate
+        config.image.subscribe(
             onNext: { [weak self] image in
                 guard let self = self else { return }
                 self.eventImageView.image = image
@@ -209,6 +209,27 @@ extension EventListTableViewCell {
             }
         )
         .disposed(by: disposeBag)
+    }
+}
+
+extension EventListTableViewCell {
+    struct Config {
+        let eventTitle: String
+        let eventPrice: String
+        let eventDate: String
+        let image: Observable<UIImage>
+        
+        init(
+            eventTitle: String,
+            eventPrice: String,
+            eventDate: String,
+            image: Observable<UIImage>
+        ) {
+            self.eventTitle = eventTitle
+            self.eventPrice = eventPrice
+            self.eventDate = eventDate
+            self.image = image
+        }
     }
 }
 

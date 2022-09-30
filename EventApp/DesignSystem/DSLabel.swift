@@ -15,7 +15,7 @@ public class DSLabel: UILabel {
         case error
     }
     
-    var labelType: LabelType!
+    var labelType: LabelType?
     
     private override init(frame: CGRect = .zero) {
         super.init(frame: frame)

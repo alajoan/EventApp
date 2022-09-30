@@ -180,21 +180,38 @@ extension EventDetailsMainView {
 }
 
 extension EventDetailsMainView {
-    func setData(
-        eventDescription: String,
-        eventMapCoordinates: MKPointAnnotation,
-        eventMapRegion: MKCoordinateRegion,
-        eventPrice: String,
-        eventDate: String
-    ) {
-        self.eventDescription.text = eventDescription
-        self.eventMap.addAnnotation(eventMapCoordinates)
-        self.eventMap.setRegion(eventMapRegion, animated: true)
-        self.eventPrice.text = eventPrice
-        self.eventDate.text = eventDate
+    func setData(with config: Config) {
+        self.eventDescription.text = config.eventDescription
+        self.eventMap.addAnnotation(config.eventMapCoordinates)
+        self.eventMap.setRegion(config.eventMapRegion, animated: true)
+        self.eventPrice.text = config.eventPrice
+        self.eventDate.text = config.eventDate
     }
     
     @objc func checkIn() {
         delegate?.goToCheckin(eventId: eventId)
+    }
+}
+extension EventDetailsMainView {
+    struct Config {
+        let eventDescription: String
+        let eventMapCoordinates: MKPointAnnotation
+        let eventMapRegion: MKCoordinateRegion
+        let eventPrice: String
+        let eventDate: String
+        
+        init(
+            eventDescription : String,
+            eventMapCoordinates: MKPointAnnotation,
+            eventMapRegion: MKCoordinateRegion,
+            eventPrice: String,
+            eventDate: String
+        ) {
+            self.eventDescription = eventDescription
+            self.eventMapCoordinates = eventMapCoordinates
+            self.eventMapRegion = eventMapRegion
+            self.eventPrice = eventPrice
+            self.eventDate = eventDate
+        }
     }
 }

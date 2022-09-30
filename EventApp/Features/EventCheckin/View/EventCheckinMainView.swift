@@ -16,7 +16,11 @@ protocol EventCheckinViewProtocol: AnyObject {
     func showAlert(title: String, message: String)
     func isNameValid(_ name: String) -> Bool
     func isEmailValid(_ email: String) -> Bool
-    func getObservableCheckin(identifier: String, email: String, eventId: String) -> Observable<[String:String]>
+    func getObservableCheckin(
+        identifier: String,
+        email: String,
+        eventId: String
+    ) -> Observable<[String:String]>
 }
 
 final class EventCheckinMainView: UIView {
@@ -64,30 +68,14 @@ final class EventCheckinMainView: UIView {
         return emailError
     }()
     
-    public lazy var textfieldName: UITextField = {
-        let textfield = UITextField()
-        textfield.placeholder = "Nome"
-        textfield.font = UIFont.systemFont(ofSize: 14)
-        textfield.borderStyle = UITextField.BorderStyle.roundedRect
-        textfield.autocorrectionType = UITextAutocorrectionType.no
-        textfield.keyboardType = UIKeyboardType.default
-        textfield.returnKeyType = UIReturnKeyType.done
-        textfield.clearButtonMode = UITextField.ViewMode.whileEditing
-        textfield.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+    public lazy var textfieldName: DSTextfield = {
+        let textfield = DSTextfield(placeHolder: "Nome")
         textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
     
-    public lazy var textfieldEmail: UITextField = {
-        let textfield = UITextField()
-        textfield.placeholder = "E-mail"
-        textfield.font = UIFont.systemFont(ofSize: 14)
-        textfield.borderStyle = UITextField.BorderStyle.roundedRect
-        textfield.autocorrectionType = UITextAutocorrectionType.no
-        textfield.keyboardType = UIKeyboardType.default
-        textfield.returnKeyType = UIReturnKeyType.done
-        textfield.clearButtonMode = UITextField.ViewMode.whileEditing
-        textfield.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+    public lazy var textfieldEmail: DSTextfield = {
+        let textfield = DSTextfield(placeHolder: "E-mail")
         textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()

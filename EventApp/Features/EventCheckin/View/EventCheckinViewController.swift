@@ -79,7 +79,13 @@ extension EventCheckinViewController {
 
 //MARK: - protocol
 extension EventCheckinViewController: EventCheckinViewProtocol {
-    func getObservableCheckin(identifier: String, email: String, eventId: String) -> Observable<[String : String]> {
+    func getObservableCheckin
+    (
+        identifier: String,
+        email: String,
+        eventId: String
+    ) -> Observable<[String : String]>
+    {
         return viewModel.checkin(identifier: identifier, eventId: eventId, email: email)
     }
     

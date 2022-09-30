@@ -50,7 +50,6 @@ extension EventListViewController {
     
     private func customizeNavBar() {
         let navBar = self.navigationController?.navigationBar
-
         let standardAppearance = UINavigationBarAppearance()
         standardAppearance.configureWithOpaqueBackground()
         
@@ -92,12 +91,13 @@ extension EventListViewController: UITableViewDelegate {
             to: mainView.tableView.rx.items(cellIdentifier: EventListTableViewCell.identifier, cellType: EventListTableViewCell.self)) {
             [weak self] index, viewModel, cell in
                 guard let fetchImage = self?.viewModel?.fetchImage(url: viewModel.eventImageUrl) else { return }
-                cell.setData(
+                let config = EventListTableViewCell.Config(
                     eventTitle: viewModel.eventTitle,
                     eventPrice: viewModel.eventPrice,
-                    image: fetchImage,
-                    eventDate: viewModel.eventDate
+                    eventDate: viewModel.eventDate,
+                    image: fetchImage
                 )
+                cell.setData(with: config)
             }.disposed(by: disposeBag)
     }
     
