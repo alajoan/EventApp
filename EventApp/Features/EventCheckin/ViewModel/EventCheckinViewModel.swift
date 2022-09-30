@@ -19,9 +19,6 @@ class EventCheckinViewModel {
         return "Check-in"
     }
     
-    let namePublishSubject = PublishSubject<String>()
-    let emailPublishSubject = PublishSubject<String>()
-    
     init (event: Event = Event()) {
         self.event = event
     }
@@ -32,5 +29,9 @@ class EventCheckinViewModel {
     
     func isNameValid(_ name: String) -> Bool {
         return name.count > 2
+    }
+    
+    func checkin() -> Observable<[String:String]>{
+        ApiClient.checkinUser(identifier: "alajoan", eventId: 1)
     }
 }

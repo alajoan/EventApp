@@ -10,10 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol EventCheckinViewProtocol: AnyObject {
+    func check
+}
+
 final class EventCheckinMainView: UIView {
     
     private var viewModel: EventCheckinViewModel
     private var disposeBag = DisposeBag()
+    weak var delegate:
     
     private lazy var eventDescription: DSLabel = {
         let name = DSLabel(
@@ -93,6 +98,7 @@ final class EventCheckinMainView: UIView {
         button.setBackgroundColor(color: .systemMint.withAlphaComponent(0.3), forState: .disabled)
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(checkIn), for: .touchUpInside)
         return button
     }()
     
@@ -225,7 +231,16 @@ extension EventCheckinMainView {
         allValid
             .bind(to: buttonCheckin.rx.isEnabled)
             .disposed(by: disposeBag)
+    }
+    
+    @objc func checkIn() {
         
+        viewModel.checkin().subscribe(
+            onNext: { _ in
+                print("Deu certo:")
+            }
+        )
+        .disposed(by: disposeBag)
     }
 }
 

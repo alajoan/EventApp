@@ -15,7 +15,7 @@ class ApiClient {
         return request(ApiRouter.eventList)
     }
     
-    static func checkinUser(identifier: String, eventId: Int) -> Observable<Bool> {
+    static func checkinUser(identifier: String, eventId: Int) -> Observable<[String:String]> {
         return request(ApiRouter.checkIn(identifier: identifier, eventId: eventId))
     }
     
@@ -32,7 +32,7 @@ class ApiClient {
                         let image = imageData,
                         let tempImage = UIImage(data: image, scale: 1)
                     else { return }
-                    
+            
                     observer.onNext(tempImage)
                     observer.onCompleted()
                 case .failure(let error):

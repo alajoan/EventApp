@@ -17,6 +17,8 @@
 		DF1B8E0628E3289E00E513BE /* DSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1B8E0428E3289E00E513BE /* DSLabel.swift */; };
 		DF1B8E0828E3307100E513BE /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1B8E0728E3307100E513BE /* DateExtension.swift */; };
 		DF1B8E0928E3307100E513BE /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1B8E0728E3307100E513BE /* DateExtension.swift */; };
+		DF3268D928E6729400F56009 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3268D828E6729400F56009 /* Spinner.swift */; };
+		DF3268DA28E6729400F56009 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3268D828E6729400F56009 /* Spinner.swift */; };
 		DF5BDF3928DBD2C3004ADE2F /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BDF3828DBD2C3004ADE2F /* EventListViewController.swift */; };
 		DF5BDF3A28DBD2C3004ADE2F /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BDF3828DBD2C3004ADE2F /* EventListViewController.swift */; };
 		DF5BDF3D28DBD2F7004ADE2F /* EventListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BDF3C28DBD2F7004ADE2F /* EventListMainView.swift */; };
@@ -87,6 +89,7 @@
 		DF05E2A928E3570E00B1F19A /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		DF1B8E0428E3289E00E513BE /* DSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSLabel.swift; sourceTree = "<group>"; };
 		DF1B8E0728E3307100E513BE /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		DF3268D828E6729400F56009 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		DF5BDF3828DBD2C3004ADE2F /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		DF5BDF3C28DBD2F7004ADE2F /* EventListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListMainView.swift; sourceTree = "<group>"; };
 		DF5BDF3F28DBD386004ADE2F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				DF1B8E0428E3289E00E513BE /* DSLabel.swift */,
+				DF3268D828E6729400F56009 /* Spinner.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -620,6 +624,7 @@
 				DF87BD8628E4F8900065362E /* EventCheckinViewController.swift in Sources */,
 				DF71900628E203F300ED42B5 /* EventViewModel.swift in Sources */,
 				DF5BDF4028DBD386004ADE2F /* Event.swift in Sources */,
+				DF3268D928E6729400F56009 /* Spinner.swift in Sources */,
 				DF05E2AA28E3570E00B1F19A /* EventDetailsViewController.swift in Sources */,
 				DF87BD8928E4F8A40065362E /* EventCheckinMainView.swift in Sources */,
 				DF8E5D0D28DBA7FE00A8AB90 /* ViewController.swift in Sources */,
@@ -653,6 +658,7 @@
 				DFF0167F28DFC74A00726D70 /* ApiClient.swift in Sources */,
 				DF1B8E0628E3289E00E513BE /* DSLabel.swift in Sources */,
 				DF71900728E203F300ED42B5 /* EventViewModel.swift in Sources */,
+				DF3268DA28E6729400F56009 /* Spinner.swift in Sources */,
 				DF5BDF3A28DBD2C3004ADE2F /* EventListViewController.swift in Sources */,
 				DF05E2AB28E3570E00B1F19A /* EventDetailsViewController.swift in Sources */,
 				DFF0167928DFC09700726D70 /* Constants.swift in Sources */,
