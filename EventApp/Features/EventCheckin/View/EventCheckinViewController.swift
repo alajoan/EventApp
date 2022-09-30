@@ -11,9 +11,14 @@ import UIKit
 final class EventCheckinViewController: UIViewController {
     
     private var viewModel: EventCheckinViewModel
+    private var spinner: Spinner?
     
     private lazy var mainView: EventCheckinMainView = {
-        var view = EventCheckinMainView(viewModel: self.viewModel)
+        var view = EventCheckinMainView(
+            delegate: self,
+            checkinObservable: viewModel.checkin(),
+            eventId: viewModel.eventID
+        )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -21,13 +26,13 @@ final class EventCheckinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         customizeNavBar()
         layoutSubviews()
     }
     
     init(viewModel: EventCheckinViewModel) {
         self.viewModel = viewModel
+        //spinner = Spinner(superView: view)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -66,6 +71,28 @@ extension EventCheckinViewController {
         navBar?.isTranslucent = true
         navBar?.topItem?.backButtonDisplayMode = .minimal
         self.title = viewModel.eventTitle
+    }
+}
+
+extension EventCheckinViewController: EventCheckinViewProtocol {
+    func isNameValid(_ name: String) -> Bool {
+        return name.count >= 2
+    }
+    
+    func isEmailValid(_ email: String) -> Bool {
+        return email.contains("@") && email.contains(".com")
+    }
+    
+    func startSpinner() {
+        
+    }
+    
+    func stopSpinner() {
+        
+    }
+    
+    func showAlert() {
+        return
     }
 }
 

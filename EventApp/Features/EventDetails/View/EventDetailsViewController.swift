@@ -13,7 +13,7 @@ final class EventDetailsViewController: UIViewController {
     private var viewModel: EventDetailViewModel
     
     private lazy var mainView: EventDetailsMainView = {
-        var view = EventDetailsMainView(viewModel: self.viewModel)
+        var view = EventDetailsMainView(eventId: viewModel.eventId)
         view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -42,6 +42,13 @@ extension EventDetailsViewController {
     private func layoutSubviews() {
         view.addSubview(mainView)
         mainViewConstraints()
+        mainView.setData(
+            eventDescription: viewModel.eventDescription,
+            eventMapCoordinates: viewModel.mapCoordinates(),
+            eventMapRegion: viewModel.mapRegion(),
+            eventPrice: viewModel.eventPrice,
+            eventDate: viewModel.eventDate
+        )
     }
     
     private func mainViewConstraints() {

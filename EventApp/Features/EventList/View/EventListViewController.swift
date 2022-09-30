@@ -89,11 +89,12 @@ extension EventListViewController: UITableViewDelegate {
     private func bindEventList() {
         viewModel?.fetchEventList().bind(
             to: mainView.tableView.rx.items(cellIdentifier: EventListTableViewCell.identifier, cellType: EventListTableViewCell.self)) {
-            index, viewModel, cell in
+            [weak self] index, viewModel, cell in
+                guard let fetchImage = self?.viewModel?.fetchImage(url: viewModel.eventImageUrl) else { return }
                 cell.setData(
                     eventTitle: viewModel.eventTitle,
                     eventPrice: viewModel.eventPrice,
-                    eventImageUrl: viewModel.eventImageUrl,
+                    image: fetchImage,
                     eventDate: viewModel.eventDate
                 )
             }.disposed(by: disposeBag)

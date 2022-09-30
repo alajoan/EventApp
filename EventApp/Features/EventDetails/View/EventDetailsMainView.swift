@@ -16,7 +16,7 @@ protocol EventDetailsMainViewProtocol: AnyObject {
 final class EventDetailsMainView: UIView {
     
     weak var delegate: EventDetailsMainViewProtocol?
-    private var viewModel: EventDetailViewModel
+    private var eventId: String
     
     var contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 200)
     
@@ -39,7 +39,6 @@ final class EventDetailsMainView: UIView {
         event.translatesAutoresizingMaskIntoConstraints = false
         event.font = UIFont.systemFont(ofSize: 14, weight: .thin)
         event.sizeToFit()
-        event.text = viewModel.eventDescription
         event.isScrollEnabled = true
         return event
     }()
@@ -50,15 +49,12 @@ final class EventDetailsMainView: UIView {
         map.isZoomEnabled = true
         map.isScrollEnabled = true
         map.translatesAutoresizingMaskIntoConstraints = false
-        map.addAnnotation(viewModel.mapCoordinates())
-        map.setRegion(viewModel.mapRegion(), animated: true)
         return map
     }()
     
     private lazy var eventPrice: DSLabel = {
         let price = DSLabel(
             labelType: .descriptionText,
-            text: viewModel.eventPrice,
             alignment: .center
         )
         price.numberOfLines = 0
@@ -69,7 +65,6 @@ final class EventDetailsMainView: UIView {
     private lazy var eventDate: DSLabel = {
         let eventDate = DSLabel(
             labelType: .descriptionText,
-            text: viewModel.eventDate,
             alignment: .center
         )
         eventDate.numberOfLines = 0
@@ -87,8 +82,8 @@ final class EventDetailsMainView: UIView {
         return button
     }()
     
-    init(viewModel: EventDetailViewModel) {
-        self.viewModel = viewModel
+    init(eventId: String) {
+        self.eventId = eventId
         super.init(frame: .zero)
         layoutViews()
     }
@@ -182,7 +177,21 @@ extension EventDetailsMainView {
 }
 
 extension EventDetailsMainView {
+    func setData(
+        eventDescription: String,
+        eventMapCoordinates: MKPointAnnotation,
+        eventMapRegion: MKCoordinateRegion,
+        eventPrice: String,
+        eventDate: String
+    ) {
+        self.eventDescription.text = eventDescription
+        self.eventMap.addAnnotation(eventMapCoordinates)
+        self.eventMap.setRegion(eventMapRegion, animated: true)
+        self.eventPrice.text = eventPrice
+        self.eventDate.text = eventDate
+    }
+    
     @objc func checkIn() {
-        delegate?.goToCheckin(eventId: viewModel.eventId)
+        delegate?.goToCheckin(eventId: eventId)
     }
 }

@@ -14,8 +14,6 @@ final class EventListTableViewCell: UITableViewCell {
     private var gradient: CAGradientLayer?
     private var disposeBag = DisposeBag()
     
-    private var viewModel = EventListViewModel()
-    
     private lazy var holder: UIView = {
         var holder = UIView()
         holder.translatesAutoresizingMaskIntoConstraints = false
@@ -189,17 +187,24 @@ extension EventListTableViewCell {
 }
 
 extension EventListTableViewCell {
-    func setData(eventTitle: String, eventPrice: String, eventImageUrl: String, eventDate: String) {
+    func setData(eventTitle: String, eventPrice: String, image: Observable<UIImage>, eventDate: String) {
         eventTitleLabel.text = eventTitle
         eventPriceLabel.text = eventPrice
         eventDateLabel.text = eventDate
-        viewModel.fetchImage(url: eventImageUrl)
-            .subscribe(on: MainScheduler.instance)
-            .subscribe(
-                onNext: { image in
-                    self.eventImageView.image = image
-                }
-            )
-            .disposed(by: disposeBag)
+        image.subscribe(
+            onNext: { [weak self] image in
+                self?.eventImageView.image = image
+            }
+        )
+        .disposed(by: disposeBag)
+//        viewModel.fetchImage(url: eventImageUrl)
+//            .subscribe(on: MainScheduler.instance)
+//            .subscribe(
+//                onNext: { image in
+//                    self.eventImageView.image = image
+//                }
+//            )
+//            .disposed(by: disposeBag)
     }
 }
+

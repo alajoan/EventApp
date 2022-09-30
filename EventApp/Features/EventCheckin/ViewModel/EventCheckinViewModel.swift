@@ -19,6 +19,10 @@ class EventCheckinViewModel {
         return "Check-in"
     }
     
+    var eventID: String {
+        return event.id
+    }
+    
     init (event: Event = Event()) {
         self.event = event
     }

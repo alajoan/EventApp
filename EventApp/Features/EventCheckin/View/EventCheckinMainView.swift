@@ -11,20 +11,21 @@ import RxSwift
 import RxCocoa
 
 protocol EventCheckinViewProtocol: AnyObject {
-    func check
+    func startSpinner()
+    func stopSpinner()
+    func showAlert()
+    func isNameValid(_ name: String) -> Bool
+    func isEmailValid(_ email: String) -> Bool
 }
 
 final class EventCheckinMainView: UIView {
-    
-    private var viewModel: EventCheckinViewModel
     private var disposeBag = DisposeBag()
-    weak var delegate:
+    weak var delegate: EventCheckinViewProtocol?
+    private var checkinObservable: Observable<[String:String]>
+    private var eventId: String
     
     private lazy var eventDescription: DSLabel = {
-        let name = DSLabel(
-            labelType: .descriptionText,
-            text: viewModel.eventCheckinDescription
-        )
+        let name = DSLabel(labelType: .descriptionText)
         name.numberOfLines = 0
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
@@ -102,8 +103,10 @@ final class EventCheckinMainView: UIView {
         return button
     }()
     
-    init(viewModel: EventCheckinViewModel) {
-        self.viewModel = viewModel
+    init(delegate: EventCheckinViewProtocol, checkinObservable: Observable<[String:String]>, eventId: String) {
+        self.delegate = delegate
+        self.checkinObservable = checkinObservable
+        self.eventId = eventId
         super.init(frame: .zero)
         bindError()
         layoutViews()
@@ -209,12 +212,12 @@ extension EventCheckinMainView {
     func bindError() {
         let usernameValid = textfieldName.rx.text.orEmpty
             .map { [weak self] name -> Bool in
-                self?.viewModel.isNameValid(name) ?? false
+                self?.delegate?.isNameValid(name) ?? false
             }
             .share(replay: 1)
         let emailValid = textfieldEmail.rx.text.orEmpty
             .map { [weak self] email -> Bool in
-                self?.viewModel.isEmailValid(email) ?? false
+                self?.delegate?.isEmailValid(email) ?? false
             }
             .share(replay: 1)
         
@@ -234,9 +237,11 @@ extension EventCheckinMainView {
     }
     
     @objc func checkIn() {
+        delegate?.startSpinner()
         
-        viewModel.checkin().subscribe(
-            onNext: { _ in
+        checkinObservable.subscribe(
+            onNext: {[weak self] _ in
+                self?.delegate?.stopSpinner()
                 print("Deu certo:")
             }
         )
