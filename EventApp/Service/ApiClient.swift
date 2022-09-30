@@ -15,7 +15,7 @@ class ApiClient {
         return request(ApiRouter.eventList)
     }
     
-    static func checkinUser(identifier: String, eventId: Int, email: String) -> Observable<[String:String]> {
+    static func checkinUser(identifier: String, eventId: String, email: String) -> Observable<[String:String]> {
         return request(ApiRouter.checkIn(identifier: identifier, eventId: eventId, email: email))
     }
     

@@ -16,12 +16,12 @@ protocol EventCheckinViewProtocol: AnyObject {
     func showAlert(title: String, message: String)
     func isNameValid(_ name: String) -> Bool
     func isEmailValid(_ email: String) -> Bool
+    func getObservableCheckin(identifier: String, email: String, eventId: String) -> Observable<[String:String]>
 }
 
 final class EventCheckinMainView: UIView {
     private var disposeBag = DisposeBag()
     weak var delegate: EventCheckinViewProtocol?
-    private var checkinObservable: Observable<[String:String]>
     private var eventId: String
     
     private lazy var eventDescription: DSLabel = {
@@ -103,9 +103,8 @@ final class EventCheckinMainView: UIView {
         return button
     }()
     
-    init(delegate: EventCheckinViewProtocol, checkinObservable: Observable<[String:String]>, eventId: String) {
+    init(delegate: EventCheckinViewProtocol, eventId: String) {
         self.delegate = delegate
-        self.checkinObservable = checkinObservable
         self.eventId = eventId
         super.init(frame: .zero)
         bindError()
@@ -238,7 +237,8 @@ extension EventCheckinMainView {
     
     @objc func checkIn() {
         delegate?.startSpinner()
-        checkinObservable.subscribe(
+        let checkinObservable = delegate?.getObservableCheckin(identifier: textfieldName.text ?? "", email: textfieldEmail.text ?? "", eventId: eventId)
+        checkinObservable?.subscribe(
             onNext: {[weak self] _ in
                 self?.delegate?.stopSpinner()
                 self?.delegate?.showAlert(title: "foi", message: "Realmente foi")

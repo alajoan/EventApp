@@ -10,7 +10,7 @@ import Alamofire
 
 enum ApiRouter: URLRequestConvertible {
     
-    case checkIn(identifier: String, eventId: Int, email: String)
+    case checkIn(identifier: String, eventId: String, email: String)
     case eventList
     case download(url: String)
     

@@ -36,6 +36,6 @@ class EventCheckinViewModel {
     }
     
     func checkin(identifier: String, eventId: String, email: String) -> Observable<[String:String]>{
-        ApiClient.checkinUser(identifier: "alajoan", eventId: 1, email: "alajoan@gmail.com")
+        ApiClient.checkinUser(identifier: identifier, eventId: eventId, email: email)
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 final class EventCheckinViewController: UIViewController {
     
@@ -16,7 +17,6 @@ final class EventCheckinViewController: UIViewController {
     private lazy var mainView: EventCheckinMainView = {
         var view = EventCheckinMainView(
             delegate: self,
-            checkinObservable: viewModel.checkin(identifier: "alajoan", eventId: "2", email: "alajoan.joantahn@gmail.com"),
             eventId: viewModel.eventID
         )
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,6 @@ final class EventCheckinViewController: UIViewController {
     
     init(viewModel: EventCheckinViewModel) {
         self.viewModel = viewModel
-        //
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -76,6 +75,10 @@ extension EventCheckinViewController {
 }
 
 extension EventCheckinViewController: EventCheckinViewProtocol {
+    func getObservableCheckin(identifier: String, email: String, eventId: String) -> Observable<[String : String]> {
+        return viewModel.checkin(identifier: identifier, eventId: eventId, email: email)
+    }
+    
     func isNameValid(_ name: String) -> Bool {
         return name.count >= 2
     }
