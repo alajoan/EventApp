@@ -82,6 +82,7 @@ final class EventDetailsMainView: UIView {
         return button
     }()
     
+    //MARK: - View Lifecycle
     init(eventId: String) {
         self.eventId = eventId
         super.init(frame: .zero)
@@ -94,6 +95,7 @@ final class EventDetailsMainView: UIView {
     }
 }
 
+//MARK: - Layout
 extension EventDetailsMainView {
     private func layoutViews() {
         addSubview(scrollView)
@@ -112,7 +114,8 @@ extension EventDetailsMainView {
         eventPriceConstraints()
         checkinButtonConstraints()
     }
-     
+    
+    //MARK: - Constraints
     private func scrollViewConstraints() {
         NSLayoutConstraint.activate([
             scrollView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),

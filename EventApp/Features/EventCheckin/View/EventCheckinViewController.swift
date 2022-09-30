@@ -23,6 +23,7 @@ final class EventCheckinViewController: UIViewController {
         return view
     }()
     
+    //MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -42,6 +43,8 @@ final class EventCheckinViewController: UIViewController {
     }
     
 }
+
+//MARK: - Layout
 extension EventCheckinViewController {
     private func layoutSubviews() {
         view.addSubview(mainView)
@@ -74,6 +77,7 @@ extension EventCheckinViewController {
     }
 }
 
+//MARK: - protocol
 extension EventCheckinViewController: EventCheckinViewProtocol {
     func getObservableCheckin(identifier: String, email: String, eventId: String) -> Observable<[String : String]> {
         return viewModel.checkin(identifier: identifier, eventId: eventId, email: email)

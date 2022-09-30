@@ -103,6 +103,7 @@ final class EventCheckinMainView: UIView {
         return button
     }()
     
+    //MARK: - view Lifecycle
     init(delegate: EventCheckinViewProtocol, eventId: String) {
         self.delegate = delegate
         self.eventId = eventId
@@ -139,6 +140,7 @@ extension EventCheckinMainView {
         buttonCheckinConstraints()
     }
     
+    //MARK: - Constraints
     private func eventDescriptionConstraints() {
         NSLayoutConstraint.activate([
             eventDescription.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
@@ -207,16 +209,19 @@ extension EventCheckinMainView {
     }
 }
 
+//MARK: - data funcs
 extension EventCheckinMainView {
     func bindError() {
         let usernameValid = textfieldName.rx.text.orEmpty
             .map { [weak self] name -> Bool in
-                self?.delegate?.isNameValid(name) ?? false
+                guard let self = self else {return false}
+                return self.delegate?.isNameValid(name) ?? false
             }
             .share(replay: 1)
         let emailValid = textfieldEmail.rx.text.orEmpty
             .map { [weak self] email -> Bool in
-                self?.delegate?.isEmailValid(email) ?? false
+                guard let self = self else {return false}
+                return self.delegate?.isEmailValid(email) ?? false
             }
             .share(replay: 1)
         
@@ -240,9 +245,20 @@ extension EventCheckinMainView {
         let checkinObservable = delegate?.getObservableCheckin(identifier: textfieldName.text ?? "", email: textfieldEmail.text ?? "", eventId: eventId)
         checkinObservable?.subscribe(
             onNext: {[weak self] _ in
-                self?.delegate?.stopSpinner()
-                self?.delegate?.showAlert(title: "foi", message: "Realmente foi")
-                print("Deu certo:")
+                guard let self = self else {return}
+                self.delegate?.stopSpinner()
+                self.delegate?.showAlert(
+                    title: "Check-in feito!",
+                    message: "O check-in no evento foi realizado com sucesso!"
+                )
+            },
+            onError: { [weak self] _ in
+                guard let self = self else {return}
+                self.delegate?.stopSpinner()
+                self.delegate?.showAlert(
+                    title: "Ocorreu um erro",
+                    message: "Ocorreu um erro ao tentar fazer o check-in. Tente novamente mais tarde"
+                )
             }
         )
         .disposed(by: disposeBag)

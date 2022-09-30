@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class EventListTableViewCell: UITableViewCell {
+    
     static let identifier = "eventListCell"
     private var gradient: CAGradientLayer?
     private var disposeBag = DisposeBag()
@@ -59,6 +60,7 @@ final class EventListTableViewCell: UITableViewCell {
         return view
     }()
     
+    //MARK: - View Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -115,6 +117,7 @@ extension EventListTableViewCell {
         bottomShadow.layer.insertSublayer(gradient ?? CAGradientLayer(), at: 0)
     }
     
+    //MARK: - Constraints
     private func holderConstraints () {
         NSLayoutConstraint.activate([
             holder.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -170,7 +173,10 @@ extension EventListTableViewCell {
     private func eventPriceLabelConstraints() {
         NSLayoutConstraint.activate([
             eventPriceLabel.centerYAnchor.constraint(equalTo: eventDateLabel.centerYAnchor),
-            eventPriceLabel.trailingAnchor.constraint(equalTo:  holder.trailingAnchor, constant: -40)
+            eventPriceLabel.trailingAnchor.constraint(
+                equalTo:  holder.trailingAnchor,
+                constant: -40
+            )
         ])
         
     }
@@ -186,6 +192,7 @@ extension EventListTableViewCell {
     
 }
 
+//MARK: - Data related funcs
 extension EventListTableViewCell {
     func setData(eventTitle: String, eventPrice: String, image: Observable<UIImage>, eventDate: String) {
         eventTitleLabel.text = eventTitle
@@ -193,18 +200,15 @@ extension EventListTableViewCell {
         eventDateLabel.text = eventDate
         image.subscribe(
             onNext: { [weak self] image in
-                self?.eventImageView.image = image
+                guard let self = self else { return }
+                self.eventImageView.image = image
+            },
+            onError: { [weak self] image in
+                guard let self = self else { return }
+                self.eventImageView.image = UIImage(named: "ImageNotAvailable")
             }
         )
         .disposed(by: disposeBag)
-//        viewModel.fetchImage(url: eventImageUrl)
-//            .subscribe(on: MainScheduler.instance)
-//            .subscribe(
-//                onNext: { image in
-//                    self.eventImageView.image = image
-//                }
-//            )
-//            .disposed(by: disposeBag)
     }
 }
 

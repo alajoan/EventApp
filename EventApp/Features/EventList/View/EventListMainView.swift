@@ -21,6 +21,7 @@ class EventListMainView: UIView {
         return tableView
     }()
     
+    //MARK: - View lifecycle
     init() {
         super.init(frame: .zero)
         layoutViews()
@@ -38,8 +39,6 @@ extension EventListMainView {
     private func layoutViews() {
         addSubview(tableView)
         NSLayoutConstraint.activate([
-            
-            // MARK: - tableViewConstraints
             tableView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: 5

@@ -20,6 +20,7 @@ final class EventListViewController: UIViewController {
         return mainView
     }()
     
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.tableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -63,9 +64,9 @@ extension EventListViewController {
         self.title = "Eventos"
     }
     
+    //MARK: - Constraints
     private func mainViewConstraints() {
         NSLayoutConstraint.activate([
-            // MARK: - mainViewConstraints
             mainView.topAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.topAnchor            ),
             mainView.leadingAnchor.constraint(
@@ -84,7 +85,7 @@ extension EventListViewController {
     }
 }
 
-//MARK: - private funcs
+//MARK: - Data funcs
 extension EventListViewController: UITableViewDelegate {
     private func bindEventList() {
         viewModel?.fetchEventList().bind(
